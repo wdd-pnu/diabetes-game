@@ -215,9 +215,9 @@ function drawPath(){var h='';for(var i=0;i<L.length;i++){if(i)h+='<span class="b
 function drawCards(fresh){var h='';C.forEach(function(c,i){if(open[i])h+='<div class="card'+(fresh===i?' fresh':'')+'"><span class="n">بطاقة '+ar(i+1)+'</span><h3>'+c[0]+'</h3>'+c[1]+'</div>';else h+='<div class="card locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>بطاقة '+ar(i+1)+'<br>جاوبي الموقف '+ar(i+1)+' صح</span></div>'});cardsEl.innerHTML=h}
 function intro(){
   stage.innerHTML='<span class="lab">جاهزة؟</span><h2>ستة مواقف، ثلاث خيارات لكل موقف، وجواب واحد صح.</h2>'+
-  '<div class="namebox"><label for="nm">اسمك (يطلع في الشهادة)</label><input id="nm" type="text" maxlength="30" placeholder="مثلًا: تهاني" autocomplete="off"></div>'+
+  '<div class="namebox"><label for="nm">اسمك (يطلع في الشهادة)</label><input id="nm" type="text" maxlength="30" placeholder="اكتبي اسمك هنا" required autocomplete="off"><span id="nmErr" hidden style="color:#FFB4A8;font-weight:700;font-size:14.5px">اكتبي اسمك أول عشان يطلع في الشهادة</span></div>'+
   '<button type="button" class="go" id="start">ابدئي اللعب</button>';
-  document.getElementById('start').onclick=function(){name=(document.getElementById('nm').value||'').trim();lv=0;show()};
+  document.getElementById('start').onclick=function(){var i=document.getElementById('nm');name=(i.value||'').trim();if(!name){document.getElementById('nmErr').hidden=false;i.focus();return}lv=0;show()};
 }
 function show(){
   var s=L[lv];drawPath();
@@ -242,7 +242,7 @@ function finish(){
   drawPath();var right=res.filter(function(x){return x===1}).length,stars=right>=6?3:right>=4?2:1;
   var st='';for(var i=0;i<3;i++)st+='<svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z" fill="'+(i<stars?'var(--gold)':'var(--line)')+'"/></svg>';
   var d=new Date(),ds=ar(d.getDate())+'/'+ar(d.getMonth()+1)+'/'+ar(d.getFullYear());
-  stage.innerHTML='<span class="lab">النتيجة</span><div class="cert"><div class="ring">'+ar(right)+'/'+ar(L.length)+'</div><div class="stars">'+st+'</div><small>شهادة</small><span class="nm">'+(name?esc(name):'سفيرة التوعية')+'</span><h3>'+(right===L.length?'سفيرة التوعية بالسكري':right>=4?'قريبة تصيرين سفيرة توعية':'بداية حلوة، جربي مرة ثانية')+'</h3><p>'+(right===L.length?'عرفتِ تتصرفين صح في كل المواقف. شاركي اللي تعلمتيه في اليوم العالمي للسكري ١٤ نوفمبر.':'افتحي بطاقات المعرفة تحت واقريها، بعدين العبي مرة ثانية وخذي النجوم الثلاث.')+'</p><small>'+ds+'</small></div><button type="button" class="go" id="again">العبي مرة ثانية</button>';
+  stage.innerHTML='<span class="lab">النتيجة</span><div class="cert"><div class="ring">'+ar(right)+'/'+ar(L.length)+'</div><div class="stars">'+st+'</div><small>شهادة</small><span class="nm">'+(name?esc(name):'')+'</span><h3>'+(right===L.length?'سفيرة التوعية بالسكري':right>=4?'قريبة تصيرين سفيرة توعية':'بداية حلوة، جربي مرة ثانية')+'</h3><p>'+(right===L.length?'عرفتِ تتصرفين صح في كل المواقف. شاركي اللي تعلمتيه في اليوم العالمي للسكري ١٤ نوفمبر.':'افتحي بطاقات المعرفة تحت واقريها، بعدين العبي مرة ثانية وخذي النجوم الثلاث.')+'</p><small>'+ds+'</small></div><button type="button" class="go" id="again">العبي مرة ثانية</button>';
   document.getElementById('again').onclick=function(){lv=0;score=0;res=[];show()};
 }
 document.getElementById('revealAll').onclick=function(){open=C.map(function(){return true});drawCards();this.hidden=true};
