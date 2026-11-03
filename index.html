@@ -42,7 +42,7 @@ a{color:var(--blue)}
 
 /* level path */
 .path{display:flex;align-items:center;gap:0;margin:8px 0 18px;direction:rtl}
-.path .lv{flex:none;width:44px;height:44px;border-radius:50%;border:5px solid var(--line);background:var(--paper);display:grid;place-items:center;font-weight:900;color:var(--mute);transition:all .3s}
+.path .lv{flex:none;width:36px;height:36px;font-size:14px;border-radius:50%;border:4px solid var(--line);background:var(--paper);display:grid;place-items:center;font-weight:900;color:var(--mute);transition:all .3s}
 .path .bar{flex:1;height:5px;background:var(--line);transition:background .3s}
 .path .lv.now{border-color:var(--blue);color:var(--blue);transform:scale(1.12)}
 .path .lv.win{border-color:var(--blue);background:var(--blue);color:var(--blue-ink)}
@@ -73,7 +73,7 @@ a{color:var(--blue)}
 .fb p{color:var(--mute);font-size:16px}
 .fb .unlock{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14.5px;color:var(--gold);background:var(--goldbg);border-radius:12px;padding:4px 12px;justify-self:start}
 .next{justify-self:start;background:var(--blue);color:var(--blue-ink);border:0;border-radius:99px;padding:6px 26px;font-weight:800;font-size:17px}
-.go{background:var(--stage-ink);color:var(--stage);border:0;border-radius:99px;padding:8px 30px;font-weight:900;font-size:19px;justify-self:start;position:relative;z-index:1}
+.go{background:var(--paper);color:var(--stage);border:0;border-radius:99px;padding:8px 30px;font-weight:900;font-size:19px;justify-self:start;position:relative;z-index:1}
 .namebox{display:grid;gap:6px;position:relative;z-index:1;max-width:360px}
 .namebox label{font-size:14.5px;color:var(--stage-mute);font-weight:700}
 .namebox input{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:8px 14px;color:var(--stage-ink)}
@@ -104,6 +104,7 @@ a{color:var(--blue)}
 .card.locked span{color:var(--mute);font-weight:700;font-size:14.5px}
 .card.fresh{animation:flip .6s both}
 @keyframes flip{from{transform:perspective(600px) rotateY(90deg)}to{transform:none}}
+@media (max-width:640px){.path .lv{width:24px;height:24px;border-width:3px;font-size:11px}.path .bar{height:3px}}
 @media (max-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:460px){.cards{grid-template-columns:1fr}}
 .reveal-all{margin-top:12px;background:none;border:0;color:var(--blue);font-weight:700;text-decoration:underline;text-underline-offset:4px;padding:0;font-size:15px}
@@ -131,11 +132,11 @@ footer img{height:40px}
   <div class="top">
     <span class="k">لعبة مواقف · اليوم العالمي للسكري ١٤ نوفمبر</span>
     <h1>وش <span>بتسوين؟</span></h1>
-    <p>ستة مواقف ممكن تصير معك في الجامعة أو البيت. اختاري التصرف الصح، وكل إجابة صحيحة تفتح لك بطاقة معرفة عن السكري. خلّصي المراحل وخذي شهادة «سفيرة التوعية بالسكري».</p>
+    <p>١٢ موقفًا قد تمر بك في الجامعة أو في البيت، خذي وقتك واختاري التصرف الأنسب في كل موقف. وكل إجابة موفقة تفتح لك بطاقة معرفية عن مرض السكري. أكملي المراحل الـ١٢، وتهانينا مقدمًا بحصولك على شهادة «سفيرة التوعية بالسكري».</p>
   </div>
 
   <div class="path" id="path" aria-hidden="true"></div>
-  <div class="hud"><span>المرحلة <b id="lvTxt">٠ من ٦</b></span><span>النقاط <b id="pts">٠</b></span></div>
+  <div class="hud"><span>المرحلة <b id="lvTxt">٠ من ١٢</b></span><span>النقاط <b id="pts">٠</b></span></div>
 
   <section class="stage" id="stage" aria-live="polite"></section>
 
@@ -171,7 +172,13 @@ var IC={
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M10 20v-5h4v5"/></svg>',
  drop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg>',
  kid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>',
- walk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M9 21l3-7 3 3v4M8 12l3-4 4 1 2 3"/></svg>'
+ walk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="M9 21l3-7 3 3v4M8 12l3-4 4 1 2 3"/></svg>',
+ cup:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h12v6a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5z"/><path d="M17 10h2a2 2 0 0 1 0 4h-2M8 2v3M12 2v3"/></svg>',
+ plane:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-8-6 12-3-5z"/><path d="M13 15l-4 4"/></svg>',
+ moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15A8 8 0 1 1 9 4a6 6 0 0 0 11 11z"/></svg>',
+ foot:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21c-3 0-4-3-3-7s1-8 4-8 3 4 3 7-1 8-4 8z"/><circle cx="14" cy="5" r="1.5"/><circle cx="17" cy="7" r="1.2"/><circle cx="19" cy="10" r="1"/></svg>',
+ sick:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg>',
+ clip:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12l2 2 4-4"/></svg>'
 };
 var L=[
  {ic:'class',lab:'في القاعة',q:'زميلتك اللي عندها سكري صارت ترجف وتتعرق، وتقول إنها دايخة. هي واعية وتقدر تتكلم. وش بتسوين؟',
@@ -197,7 +204,31 @@ var L=[
  {ic:'walk',lab:'مع أبوك',q:'أبوك سوّى تحليل وطلع عنده «مقدمات السكري». وش تنصحينه؟',
   c:[['يتابع مع طبيبه، ويمشي يوميًا، ويحافظ على وزن مناسب وأكل متوازن',1],['ما يحتاج شي، هي مو سكري',0],['يبدأ ياخذ إنسولين من نفسه',0]],
   ok:'صح. مقدمات السكري فرصة ذهبية، لأن النوع الثاني يمكن في كثير من الحالات الوقاية منه أو تأخيره بنمط حياة صحي ومتابعة طبية.',
-  no:'مقدمات السكري تحتاج اهتمام، والعلاج بدون طبيب خطر. النوع الثاني يمكن في كثير من الحالات الوقاية منه أو تأخيره بالحركة والوزن المناسب والأكل المتوازن ومتابعة الطبيب.'}
+  no:'مقدمات السكري تحتاج اهتمام، والعلاج بدون طبيب خطر. النوع الثاني يمكن في كثير من الحالات الوقاية منه أو تأخيره بالحركة والوزن المناسب والأكل المتوازن ومتابعة الطبيب.'},
+ {ic:'cup',lab:'في الكافتيريا',q:'زميلتك اللي عندها سكري تقول إنها تحس برجفة وجوع مفاجئ، وجهاز القياس ناسيته في البيت. وش بتسوين؟',
+  c:[['ننتظر لين ترجع البيت وتقيس',0],['أعطيها سكر سريع مثل نصف كوب عصير، وتقيس أول ما تقدر',1],['أجيب لها وجبة كبيرة وتأكلها بهدوء',0]],
+  ok:'صح. إذا ظهرت علامات الانخفاض وما فيه جهاز قياس، الأسلم نتعامل معها كانخفاض ونعطي سكر سريع الامتصاص، بعدها تقيس أول ما تقدر.',
+  no:'الانتظار خطر لأن الانخفاض ممكن يسوء بسرعة، والوجبة الكبيرة ترفع السكر ببطء. الأسلم سكر سريع الامتصاص مثل نصف كوب عصير، والقياس أول ما تقدر.'},
+ {ic:'plane',lab:'رحلة الدفعة',q:'مسافرين رحلة مع الدفعة، وصديقتك اللي عندها سكري تسألك: «وين أحط الإنسولين؟» وش تنصحينها؟',
+  c:[['في الشنطة الكبيرة اللي تنشحن',0],['معها في الشنطة اليدوية، بعيد عن الحرارة، ومعه جهاز القياس وسناك احتياط',1],['في السيارة عشان ما يضايقها',0]],
+  ok:'صح. الإنسولين والأدوات تكون مع المصاب في الشنطة اليدوية، محمية من الحرارة الشديدة، ومعها سناك احتياط للانخفاض.',
+  no:'الشنطة المشحونة ممكن تضيع أو تتعرض لحرارة أو برودة شديدة، والسيارة تحت الشمس تتلف الإنسولين. الصح يكون معها في الشنطة اليدوية مع جهاز القياس وسناك احتياط.'},
+ {ic:'moon',lab:'قبل رمضان',q:'صديقتك اللي عندها سكري تقول: «بصوم رمضان مثل الكل، وبوقف أدويتي عشان ما أتعب». وش تقولين لها؟',
+  c:[['زين، الصيام يغني عن الأدوية',0],['تراجع طبيبها قبل رمضان عشان يحدد إذا تقدر تصوم ويعدل خطتها',1],['تصوم وما تقيس سكرها عشان ما يفطّر',0]],
+  ok:'صح. قبل رمضان لازم المصاب يراجع طبيبه، هو اللي يحدد إذا الصيام آمن ويعدل مواعيد الأدوية. وقياس السكر ما يفطّر.',
+  no:'إيقاف الأدوية من نفسها خطر، وقياس السكر ما يفطّر. الصح تراجع طبيبها قبل رمضان، وهو يحدد إذا تقدر تصوم ويعدل خطتها.'},
+ {ic:'foot',lab:'زيارة خالتك',q:'خالتك عندها سكري، ولاحظتي جرح صغير في قدمها وهي ما حست فيه. وش تنصحينها؟',
+  c:[['جرح صغير ويروح لحاله',0],['تمشي حافية عشان يتهوى',0],['تراجع الطبيب، وتفحص قدميها كل يوم وتلبس حذاء مريح',1]],
+  ok:'صح. السكري ممكن يأثر على الأعصاب فيقل الإحساس في القدم، وأي جرح بسيط ممكن يتطور. الفحص اليومي ومراجعة الطبيب يحمون من القدم السكرية.',
+  no:'المصاب ممكن ما يحس بالجرح لأن السكري يأثر على الأعصاب، والجرح البسيط ممكن يتطور. الصح تراجع الطبيب وتفحص قدميها يوميًا وتلبس حذاء مريح.'},
+ {ic:'sick',lab:'أيام المرض',q:'أختك عندها النوع الأول، وجاتها إنفلونزا وما تشتهي تاكل. تقول: «بوقف الإنسولين لين أتحسن». وش تقولين؟',
+  c:[['لا توقفه، تكثر القياس وتشرب سوائل وتتواصل مع طبيبها',1],['صح، ما دامها ما تاكل ما تحتاجه',0],['تنام وما تقيس لين تصحى',0]],
+  ok:'صح. في أيام المرض ممكن يرتفع السكر حتى لو ما أكلت، فما يوقف الإنسولين. تكثر القياس وتشرب سوائل وتتبع خطة طبيبها لأيام المرض.',
+  no:'المرض ممكن يرفع السكر حتى بدون أكل، وإيقاف الإنسولين في النوع الأول خطير. الصح تكثر القياس وتشرب سوائل وتتواصل مع طبيبها.'},
+ {ic:'clip',lab:'موعد المتابعة',q:'صديقتك اللي عندها سكري تقول: «ما دامني أحس إني بخير، ليش أروح مواعيد المتابعة؟» وش تردين؟',
+  c:[['معها حق، الموعد بس إذا تعبت',0],['المتابعة الدورية مهمة حتى لو تحس بخير، لأنها تكشف المضاعفات بدري',1],['تكتفي بقياس السكر في البيت بس',0]],
+  ok:'صح. الفحوصات الدورية، مثل السكر التراكمي وفحص العين والكلى والقدم، تكشف المضاعفات بدري قبل ما تظهر أعراضها.',
+  no:'بعض مضاعفات السكري ما تعطي أعراض في البداية. عشان كذا المتابعة الدورية مهمة، مثل السكر التراكمي وفحص العين والكلى والقدم، حتى لو الشخص يحس بخير.'}
 ];
 var C=[
  ['انخفاض السكر','<p>أقل من ٧٠ ملغ/دل عادةً. علاماته: رجفة، تعرّق، دوخة، جوع مفاجئ، شحوب، تشوّش.</p><p><b>قاعدة ١٥/١٥:</b> ١٥ غرامًا سكر سريع، انتظار ١٥ دقيقة، قياس، وتكرار إذا بقي منخفضًا، ثم وجبة خفيفة.</p>'],
@@ -205,7 +236,13 @@ var C=[
  ['خرافات منتشرة','<ul><li>السكري سببه السكر: خرافة</li><li>المصاب ممنوع من الحلا نهائيًا: خرافة، يأكل بخطة محسوبة</li><li>الإنسولين يسبب الإدمان: خرافة</li><li>السكري معدٍ: خرافة</li><li>المصاب ما يمارس رياضة: خرافة، مفيدة مع المتابعة</li></ul>'],
  ['أعراض الارتفاع','<p>عطش شديد، كثرة التبول، جوع مستمر، إرهاق وتعب، تشوّش الرؤية، نقص الوزن بلا سبب. ظهورها يستدعي فحص السكر ومراجعة الطبيب.</p>'],
  ['الأنواع الرئيسية','<ul><li><b>الأول:</b> مناعي، يحتاج الإنسولين يوميًا مدى الحياة، يُشخَّص في أي عمر.</li><li><b>الثاني:</b> الأكثر انتشارًا، الجسم ما يستجيب للإنسولين كما ينبغي.</li><li><b>الحمل:</b> يظهر أول مرة أثناء الحمل ويحتاج متابعة.</li></ul>'],
- ['السكري في السعودية','<p>تقريبًا <b>٢٣٪</b> من البالغين (٢٠–٧٩ سنة) في المملكة عندهم سكري، حسب تقديرات أطلس الاتحاد الدولي للسكري لعام ٢٠٢٤. والوقاية من النوع الثاني ممكنة في كثير من الحالات بنمط حياة صحي.</p>']
+ ['السكري في السعودية','<p>تقريبًا <b>٢٣٪</b> من البالغين (٢٠–٧٩ سنة) في المملكة عندهم سكري، حسب تقديرات أطلس الاتحاد الدولي للسكري لعام ٢٠٢٤. والوقاية من النوع الثاني ممكنة في كثير من الحالات بنمط حياة صحي.</p>'],
+ ['بدون جهاز قياس','<p>إذا ظهرت علامات الانخفاض وما فيه جهاز، نتعامل معها كانخفاض: سكر سريع الامتصاص مثل نصف كوب عصير أو أقراص جلوكوز، ثم القياس أول ما يمكن.</p>'],
+ ['السفر والسكري','<ul><li>الإنسولين والأدوات في الشنطة اليدوية</li><li>بعيد عن الحرارة والبرودة الشديدة</li><li>سناك وسكر سريع احتياط</li><li>كمية إضافية من الأدوية</li></ul>'],
+ ['رمضان والسكري','<p>المصاب يراجع طبيبه قبل رمضان ليحدد إذا الصيام آمن ويعدل الأدوية. قياس السكر لا يفطّر، ويجب الإفطار إذا انخفض السكر أو ارتفع كثيرًا حسب تعليمات الطبيب.</p>'],
+ ['العناية بالقدم','<ul><li>فحص القدمين يوميًا</li><li>حذاء مريح وعدم المشي حافيًا</li><li>مراجعة الطبيب لأي جرح أو تغير في اللون</li></ul>'],
+ ['أيام المرض','<p>المرض قد يرفع السكر حتى مع قلة الأكل. لا يُوقف الإنسولين في النوع الأول، ويكثر المصاب القياس ويشرب سوائل ويتواصل مع طبيبه.</p>'],
+ ['الفحوصات الدورية','<ul><li>السكر التراكمي</li><li>فحص العين</li><li>فحص الكلى</li><li>فحص القدم</li></ul><p>تكشف المضاعفات بدري حتى لو الشخص يحس بخير.</p>']
 ];
 var stage=document.getElementById('stage'),pathEl=document.getElementById('path'),cardsEl=document.getElementById('cards'),ptsEl=document.getElementById('pts'),lvTxt=document.getElementById('lvTxt');
 var lv=-1,score=0,res=[],open=[],name='';
@@ -214,7 +251,7 @@ function drawPath(){var h='';for(var i=0;i<L.length;i++){if(i)h+='<span class="b
   lvTxt.textContent=ar(Math.max(0,Math.min(L.length,res.length)))+' من '+ar(L.length);ptsEl.textContent=ar(score)}
 function drawCards(fresh){var h='';C.forEach(function(c,i){if(open[i])h+='<div class="card'+(fresh===i?' fresh':'')+'"><span class="n">بطاقة '+ar(i+1)+'</span><h3>'+c[0]+'</h3>'+c[1]+'</div>';else h+='<div class="card locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>بطاقة '+ar(i+1)+'<br>جاوبي الموقف '+ar(i+1)+' صح</span></div>'});cardsEl.innerHTML=h}
 function intro(){
-  stage.innerHTML='<span class="lab">جاهزة؟</span><h2>ستة مواقف، ثلاث خيارات لكل موقف، وجواب واحد صح.</h2>'+
+  stage.innerHTML='<span class="lab">جاهزة؟</span><h2>١٢ موقفًا، ثلاث خيارات لكل موقف، وجواب واحد صح.</h2>'+
   '<div class="namebox"><label for="nm">اسمك (يطلع في الشهادة)</label><input id="nm" type="text" maxlength="30" placeholder="اكتبي اسمك هنا" required autocomplete="off"><span id="nmErr" hidden style="color:#FFB4A8;font-weight:700;font-size:14.5px">اكتبي اسمك أول عشان يطلع في الشهادة</span></div>'+
   '<button type="button" class="go" id="start">ابدئي اللعب</button>';
   document.getElementById('start').onclick=function(){var i=document.getElementById('nm');name=(i.value||'').trim();if(!name){document.getElementById('nmErr').hidden=false;i.focus();return}lv=0;show()};
@@ -239,10 +276,10 @@ function choose(i){
   drawPath();drawCards(ok?lv:-1);
 }
 function finish(){
-  drawPath();var right=res.filter(function(x){return x===1}).length,stars=right>=6?3:right>=4?2:1;
+  drawPath();var right=res.filter(function(x){return x===1}).length,stars=right>=12?3:right>=8?2:1;
   var st='';for(var i=0;i<3;i++)st+='<svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z" fill="'+(i<stars?'var(--gold)':'var(--line)')+'"/></svg>';
   var d=new Date(),ds=ar(d.getDate())+'/'+ar(d.getMonth()+1)+'/'+ar(d.getFullYear());
-  stage.innerHTML='<span class="lab">النتيجة</span><div class="cert"><div class="ring">'+ar(right)+'/'+ar(L.length)+'</div><div class="stars">'+st+'</div><small>شهادة</small><span class="nm">'+(name?esc(name):'')+'</span><h3>'+(right===L.length?'سفيرة التوعية بالسكري':right>=4?'قريبة تصيرين سفيرة توعية':'بداية حلوة، جربي مرة ثانية')+'</h3><p>'+(right===L.length?'عرفتِ تتصرفين صح في كل المواقف. شاركي اللي تعلمتيه في اليوم العالمي للسكري ١٤ نوفمبر.':'افتحي بطاقات المعرفة تحت واقريها، بعدين العبي مرة ثانية وخذي النجوم الثلاث.')+'</p><small>'+ds+'</small></div><button type="button" class="go" id="again">العبي مرة ثانية</button>';
+  stage.innerHTML='<span class="lab">النتيجة</span><div class="cert"><div class="ring" style="font-size:20px;line-height:1.1;text-align:center">'+ar(right)+'<br><span style="font-size:13px">من '+ar(L.length)+'</span></div><div class="stars">'+st+'</div><small>شهادة</small><span class="nm">'+(name?esc(name):'')+'</span><h3>'+(right===L.length?'سفيرة التوعية بالسكري':right>=8?'قريبة تصيرين سفيرة توعية':'بداية حلوة، جربي مرة ثانية')+'</h3><p>'+(right===L.length?'عرفتِ تتصرفين صح في كل المواقف. شاركي اللي تعلمتيه في اليوم العالمي للسكري ١٤ نوفمبر.':'افتحي بطاقات المعرفة تحت واقريها، بعدين العبي مرة ثانية وخذي النجوم الثلاث.')+'</p><small>'+ds+'</small></div><button type="button" class="go" id="again">العبي مرة ثانية</button>';
   document.getElementById('again').onclick=function(){lv=0;score=0;res=[];show()};
 }
 document.getElementById('revealAll').onclick=function(){open=C.map(function(){return true});drawCards();this.hidden=true};
